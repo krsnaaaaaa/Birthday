@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Birthday Countdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --smaller: .75;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #FFE5EC 0%, #FFC2D4 50%, #FFB3C6 100%);
+    font-family: 'Quicksand', sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255,182,193,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    top: -100px;
+    left: -100px;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  body::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,192,203,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    bottom: -150px;
+    right: -150px;
+    animation: float 10s ease-in-out infinite reverse;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.1); }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  @keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+
+  .sparkle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #FFB6C1;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  .sparkle:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+  .sparkle:nth-child(2) { top: 40%; right: 20%; animation-delay: 0.5s; }
+  .sparkle:nth-child(3) { bottom: 30%; left: 25%; animation-delay: 1s; }
+  .sparkle:nth-child(4) { top: 60%; right: 15%; animation-delay: 1.5s; }
+
+  .container {
+    color: #8B4165;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(255, 182, 193, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    animation: fadeInUp 1s ease-out;
+  }
+
+  h1 {
+    font-weight: bold;
+    letter-spacing: .125rem;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, #FF69B4, #FFB6C1, #FFC0CB, #FF69B4);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+    text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.3);
+    font-family: 'Pacifico', cursive;
+  }
+
+  ul {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  li {
+    display: inline-block;
+    font-size: 1.2em;
+    list-style-type: none;
+    padding: 1.5em;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    min-width: 120px;
+    box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
+    border: 2px solid rgba(255, 192, 212, 0.5);
+    animation: pulse 2s ease-in-out infinite;
+    transition: transform 0.3s ease;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+  }
+
+  li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(255, 182, 193, 0.5);
+  }
+
+  li:nth-child(1) { animation-delay: 0s; }
+  li:nth-child(2) { animation-delay: 0.2s; }
+  li:nth-child(3) { animation-delay: 0.4s; }
+  li:nth-child(4) { animation-delay: 0.6s; }
+
+  li span {
+    display: block;
+    font-size: 3.5rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #FF1493, #FF69B4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.2em;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+  }
+
+  .emoji {
+    display: none;
+    padding: 1rem;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .emoji span {
+    font-size: 5rem;
+    padding: 0 .5rem;
+    display: inline-block;
+    animation: pulse 1s ease-in-out infinite;
+  }
+
+  .emoji span:nth-child(1) { animation-delay: 0s; }
+  .emoji span:nth-child(2) { animation-delay: 0.3s; }
+  .emoji span:nth-child(3) { animation-delay: 0.6s; }
+
+  @media all and (max-width: 768px) {
+    body::before,
+    body::after {
+      width: 200px;
+      height: 200px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      letter-spacing: 0.05rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    li {
+      font-size: 0.7rem;
+      padding: 0.8em;
+      min-width: 70px;
+    }
+    
+    li span {
+      font-size: 2rem;
+      margin-bottom: 0.1em;
+    }
+
+    ul {
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .container {
+      padding: 1.5rem 1rem;
+      margin: 1rem;
+      border-radius: 20px;
+    }
+
+    .emoji span {
+      font-size: 3.5rem;
+      padding: 0 0.3rem;
+    }
+
+    .sparkle {
+      width: 6px;
+      height: 6px;
+    }
+  }
+
+  @media all and (max-width: 480px) {
+    h1 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    
+    li {
+      font-size: 0.6rem;
+      padding: 0.6em;
+      min-width: 60px;
+      border-radius: 15px;
+    }
+    
+    li span {
+      font-size: 1.6rem;
+    }
+
+    ul {
+      gap: 0.4rem;
+    }
+
+    .container {
+      padding: 1.2rem 0.8rem;
+      margin: 0.8rem;
+      border-radius: 15px;
+    }
+
+    .emoji span {
+      font-size: 3rem;
+    }
+  }
+
+  @media all and (max-width: 360px) {
+    h1 {
+      font-size: 1rem;
+    }
+    
+    li {
+      font-size: 0.55rem;
+      padding: 0.5em;
+      min-width: 55px;
+    }
+    
+    li span {
+      font-size: 1.4rem;
+    }
+
+    ul {
+      gap: 0.3rem;
+    }
+
+    .container {
+      padding: 1rem 0.6rem;
+      margin: 0.5rem;
+    }
+
+    .emoji span {
+      font-size: 2.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="sparkle"></div>
+<div class="sparkle"></div>
+<div class="sparkle"></div>
+<div class="sparkle"></div>
+
+<div class="container">
+  <h1 id="headline">Countdown to UR birthday</h1>
+  <div id="countdown">
+    <ul>
+      <li><span id="days"></span>Days</li>
+      <li><span id="hours"></span>Hours</li>
+      <li><span id="minutes"></span>Minutes</li>
+      <li><span id="seconds"></span>Seconds</li>
+    </ul>
+  </div>
+  <div id="content" class="emoji">
+    <span>🥳</span>
+    <span>🎉</span>
+    <span>🎂</span>
+  </div>
+</div>
+
+<script>
+(function() {
+  const second = 1000,
+        minute = second * 60,
+        hour = minute * 60,
+        day = hour * 24;
+
+  // Get current date and time
+  let now = new Date();
+  let currentYear = now.getFullYear();
+  
+  // Birthday is November 15 at 00:00:00
+  let birthdayMonth = 10; // November (0-indexed)
+  let birthdayDay = 15;
+  
+  // Create date objects for Nov 15 00:00:00 and Nov 16 00:00:00
+  let birthdayStart = new Date(currentYear, birthdayMonth, birthdayDay, 0, 0, 0, 0);
+  let birthdayEnd = new Date(currentYear, birthdayMonth, birthdayDay + 1, 0, 0, 0, 0); // Nov 16 00:00:00
+  
+  // If we're past Nov 16 this year, use next year's dates
+  if (now >= birthdayEnd) {
+    birthdayStart = new Date(currentYear + 1, birthdayMonth, birthdayDay, 0, 0, 0, 0);
+    birthdayEnd = new Date(currentYear + 1, birthdayMonth, birthdayDay + 1, 0, 0, 0, 0);
+  }
+  
+  // Check if current time is between Nov 15 00:00:00 and Nov 16 00:00:00
+  if (now >= birthdayStart && now < birthdayEnd) {
+    // Show birthday celebration for the entire Nov 15
+    document.getElementById("headline").innerText = "It's ur birthday! Enjoy Like A FREAK";
+    document.getElementById("countdown").style.display = "none";
+    document.getElementById("content").style.display = "block";
+  } else {
+    // Show countdown to next Nov 15 00:00:00
+    const birthday = birthdayStart.getTime();
+
+    const x = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = birthday - now;
+
+      document.getElementById("days").innerText = Math.floor(distance / day);
+      document.getElementById("hours").innerText = Math.floor((distance % day) / hour);
+      document.getElementById("minutes").innerText = Math.floor((distance % hour) / minute);
+      document.getElementById("seconds").innerText = Math.floor((distance % minute) / second);
+
+      // When countdown reaches exactly 00:00:00 on Nov 15
+      if (distance <= 0) {
+        document.getElementById("headline").innerText = "It's ur birthday! Enjoy Like A FREAK";
+        document.getElementById("countdown").style.display = "none";
+        document.getElementById("content").style.display = "block";
+        clearInterval(x);
+      }
+    }, 1000);
+  }
+})();
+</script>
+</body>
+</html>
